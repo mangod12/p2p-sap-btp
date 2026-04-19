@@ -1,0 +1,38 @@
+<mvc:View
+    controllerName="p2p.app.controller.Vendors"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{i18n>vendorsTitle}" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table id="vendorTable" items="{path: '/Vendors', parameters: {$count: true}}" growing="true">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{= 'Vendors: ' + (${/Vendors/$count} || 0)}"/>
+                        <ToolbarSpacer/>
+                        <SearchField width="20rem" liveChange=".onSearch" placeholder="{i18n>searchVendorPlaceholder}"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="{i18n>colName}"/></Column>
+                    <Column><Text text="{i18n>colContact}"/></Column>
+                    <Column><Text text="{i18n>colEmail}"/></Column>
+                    <Column><Text text="{i18n>colPhone}"/></Column>
+                    <Column><Text text="{i18n>colAddress}"/></Column>
+                    <Column hAlign="End"><Text text="{i18n>colRating}"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{name}"/>
+                            <Text text="{contact}"/>
+                            <Text text="{email}"/>
+                            <Text text="{phone}"/>
+                            <Text text="{address}"/>
+                            <RatingIndicator value="{rating}" editable="false" maxValue="5"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

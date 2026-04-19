@@ -1,0 +1,43 @@
+<mvc:View
+    controllerName="p2p.app.controller.GRList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Goods Receipts" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table id="tbl"
+                   items="{path: '/GoodsReceipts', parameters: {$count: true}}"
+                   growing="true" growingThreshold="25">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{= 'Total: ' + (${/GoodsReceipts/$count} || 0)}"/>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="GR #"/></Column>
+                    <Column><Text text="PO #"/></Column>
+                    <Column hAlign="End"><Text text="Received Qty"/></Column>
+                    <Column hAlign="End"><Text text="Ordered Qty"/></Column>
+                    <Column><Text text="Received By"/></Column>
+                    <Column><Text text="Received Date"/></Column>
+                    <Column><Text text="Status"/></Column>
+                    <Column><Text text="Action"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{grNumber}"/>
+                            <Text text="{poNumber}"/>
+                            <ObjectNumber number="{quantityReceived}"/>
+                            <ObjectNumber number="{quantityOrdered}"/>
+                            <Text text="{receivedBy}"/>
+                            <Text text="{receivedDate}"/>
+                            <ObjectStatus text="{status}" state="{= ${status} === 'Completed' ? 'Success' : 'Warning'}"/>
+                            <Button text="Complete" visible="{= ${status} === 'Pending'}" press=".onComplete"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

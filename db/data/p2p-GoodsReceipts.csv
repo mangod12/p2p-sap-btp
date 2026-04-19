@@ -1,0 +1,2 @@
+ID;grNumber;po_ID;poNumber;receivedBy;receivedDate;quantityReceived;quantityOrdered;remarks;status
+55555555-5555-5555-5555-555555555001;GR-1001;44444444-4444-4444-4444-444444444001;PO-1001;wh.manager;2026-04-15;500;500;All units received in good condition;Completed

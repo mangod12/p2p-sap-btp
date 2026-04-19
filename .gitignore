@@ -1,0 +1,13 @@
+node_modules/
+gen/
+dist/
+*.db
+*.db-shm
+*.db-wal
+.env
+default-env.json
+.cds-services.json
+*.log
+.DS_Store
+mta_archives/
+.claude/

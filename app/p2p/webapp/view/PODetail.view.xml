@@ -1,0 +1,40 @@
+<mvc:View
+    controllerName="p2p.app.controller.PODetail"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Purchase Order" showNavButton="true" navButtonPress=".onNavBack">
+        <headerContent>
+            <Button text="Send to Vendor" type="Emphasized" press=".onSend"   visible="{= ${status} === 'Open'}"/>
+            <Button text="Receive Goods"  type="Accept"     press=".onReceive" visible="{= ${status} === 'Sent' || ${status} === 'PartiallyReceived' || ${status} === 'Open'}"/>
+            <Button text="Create Invoice" press=".onInvoice"  visible="{= ${status} === 'Received' || ${status} === 'Sent' || ${status} === 'PartiallyReceived'}"/>
+            <Button text="Cancel"         type="Reject"     press=".onCancel"  visible="{= ${status} !== 'Cancelled' &amp;&amp; ${status} !== 'Received'}"/>
+        </headerContent>
+        <content>
+            <ObjectHeader title="{poNumber}" number="{totalAmount}" numberUnit="USD">
+                <statuses>
+                    <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+                </statuses>
+                <attributes>
+                    <ObjectAttribute title="Vendor" text="{vendorName}"/>
+                    <ObjectAttribute title="Material" text="{materialName}"/>
+                    <ObjectAttribute title="Quantity" text="{quantity}"/>
+                    <ObjectAttribute title="Unit Price" text="{unitPrice}"/>
+                </attributes>
+            </ObjectHeader>
+            <Panel headerText="Details" class="sapUiSmallMargin">
+                <form:SimpleForm editable="false" layout="ResponsiveGridLayout">
+                    <Label text="PO Number"/>    <Text text="{poNumber}"/>
+                    <Label text="Status"/>       <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+                    <Label text="Vendor"/>       <Text text="{vendorName}"/>
+                    <Label text="Material"/>     <Text text="{materialName}"/>
+                    <Label text="Quantity"/>     <Text text="{quantity}"/>
+                    <Label text="Unit Price"/>   <Text text="{unitPrice}"/>
+                    <Label text="Total"/>        <Text text="{totalAmount}"/>
+                    <Label text="Order Date"/>   <Text text="{orderDate}"/>
+                    <Label text="Delivery Date"/> <Text text="{deliveryDate}"/>
+                </form:SimpleForm>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

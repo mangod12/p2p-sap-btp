@@ -1,0 +1,47 @@
+<mvc:View
+    controllerName="p2p.app.controller.InvoiceList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Invoice Verification" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table id="tbl"
+                   items="{path: '/Invoices', parameters: {$count: true}}"
+                   growing="true" growingThreshold="25">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{= 'Total: ' + (${/Invoices/$count} || 0)}"/>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="Invoice #"/></Column>
+                    <Column><Text text="PO #"/></Column>
+                    <Column><Text text="Vendor"/></Column>
+                    <Column hAlign="End"><Text text="Amount"/></Column>
+                    <Column><Text text="Invoice Date"/></Column>
+                    <Column><Text text="Due Date"/></Column>
+                    <Column><Text text="Status"/></Column>
+                    <Column><Text text="Actions"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{invoiceNumber}"/>
+                            <Text text="{poNumber}"/>
+                            <Text text="{vendorName}"/>
+                            <ObjectNumber number="{amount}" unit="USD" emphasized="true"/>
+                            <Text text="{invoiceDate}"/>
+                            <Text text="{dueDate}"/>
+                            <ObjectStatus text="{status}" state="{= ${status} === 'Verified' || ${status} === 'Paid' ? 'Success' : (${status} === 'Rejected' ? 'Error' : 'Warning')}"/>
+                            <HBox>
+                                <Button text="Verify" type="Accept" visible="{= ${status} === 'Pending'}" press=".onVerify"/>
+                                <Button text="Reject" type="Reject" visible="{= ${status} === 'Pending'}" press=".onReject" class="sapUiTinyMarginBegin"/>
+                                <Button text="Pay"    type="Emphasized" visible="{= ${status} === 'Verified'}" press=".onPay" class="sapUiTinyMarginBegin"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

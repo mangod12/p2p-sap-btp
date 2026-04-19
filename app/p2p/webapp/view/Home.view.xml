@@ -1,0 +1,107 @@
+<mvc:View
+    controllerName="p2p.app.controller.Home"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{i18n>appTitle}" showHeader="true">
+        <headerContent>
+            <Button icon="sap-icon://refresh" press=".onRefresh" tooltip="Refresh KPIs"/>
+            <Button icon="sap-icon://home" text="Launchpad" press=".onLaunchpad"/>
+        </headerContent>
+        <content>
+            <VBox class="sapUiLargeMargin">
+                <Title text="{i18n>homeWelcome}" level="H2"/>
+                <Text text="{i18n>homeSubtitle}" class="sapUiSmallMarginBottom"/>
+
+                <Title text="{i18n>homeSectionKPIs}" level="H3" class="sapUiMediumMarginTop"/>
+                <HBox wrap="Wrap" class="sapUiSmallMarginTop">
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileTotalSpend}" subheader="{i18n>tileTotalSpendSub}" press=".onNav" tooltip="TotalSpend">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/totalSpend}" scale="USD" valueColor="Neutral" withMargin="false" icon="sap-icon://customer-financial-fact-sheet"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileOpenPRs}" subheader="{i18n>tileOpenPRsSub}" press=".onNav" tooltip="PurchaseRequisitions">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/openPRs}" valueColor="Good" withMargin="false" icon="sap-icon://request"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileOpenPOs}" subheader="{i18n>tileOpenPOsSub}" press=".onNav" tooltip="PurchaseOrders">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/openPOs}" valueColor="Good" withMargin="false" icon="sap-icon://shipping-status"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tilePendingGRs}" subheader="{i18n>tilePendingGRsSub}" press=".onNav" tooltip="GoodsReceipts">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/pendingGRs}" valueColor="Critical" withMargin="false" icon="sap-icon://inventory"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tilePendingInvoices}" subheader="{i18n>tilePendingInvoicesSub}" press=".onNav" tooltip="Invoices">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/pendingInvoices}" valueColor="Critical" withMargin="false" icon="sap-icon://receipt"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileScheduledPayments}" subheader="{i18n>tileScheduledPaymentsSub}" press=".onNav" tooltip="Payments">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="{kpi>/scheduledPayments}" valueColor="Neutral" withMargin="false" icon="sap-icon://money-bills"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileProcessFlow}" subheader="{i18n>tileProcessFlowSub}" press=".onNav" tooltip="ProcessFlow">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent indicator="Up" value="Trace" valueColor="Good" withMargin="false" icon="sap-icon://process"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                </HBox>
+
+                <Title text="{i18n>homeSectionMasterData}" level="H3" class="sapUiMediumMarginTop"/>
+                <HBox wrap="Wrap">
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileVendors}" press=".onNav" tooltip="Vendors">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="View" withMargin="false" icon="sap-icon://supplier"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiTinyMargin tileHover" header="{i18n>tileMaterials}" press=".onNav" tooltip="Materials">
+                        <tileContent>
+                            <TileContent>
+                                <content>
+                                    <NumericContent value="View" withMargin="false" icon="sap-icon://product"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

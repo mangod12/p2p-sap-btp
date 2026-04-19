@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="p2p.app.controller.PaymentList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Payments" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table id="tbl"
+                   items="{path: '/Payments', parameters: {$count: true}}"
+                   growing="true" growingThreshold="25">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{= 'Total: ' + (${/Payments/$count} || 0)}"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="Payment #"/></Column>
+                    <Column><Text text="Invoice #"/></Column>
+                    <Column hAlign="End"><Text text="Amount"/></Column>
+                    <Column><Text text="Method"/></Column>
+                    <Column><Text text="Reference"/></Column>
+                    <Column><Text text="Payment Date"/></Column>
+                    <Column><Text text="Status"/></Column>
+                    <Column><Text text="Action"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{paymentNumber}"/>
+                            <Text text="{invoiceNumber}"/>
+                            <ObjectNumber number="{amount}" unit="USD" emphasized="true"/>
+                            <Text text="{method}"/>
+                            <Text text="{reference}"/>
+                            <Text text="{paymentDate}"/>
+                            <ObjectStatus text="{status}" state="{= ${status} === 'Completed' ? 'Success' : (${status} === 'Failed' ? 'Error' : 'Warning')}"/>
+                            <Button text="Process" type="Emphasized" visible="{= ${status} !== 'Completed'}" press=".onProcess"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

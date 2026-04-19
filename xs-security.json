@@ -1,0 +1,44 @@
+{
+  "xsappname": "p2p-sap-btp",
+  "tenant-mode": "dedicated",
+  "description": "Security profile for the P2P application",
+  "scopes": [
+    { "name": "$XSAPPNAME.ProcurementOfficer", "description": "Create and manage PRs/POs" },
+    { "name": "$XSAPPNAME.WarehouseManager",   "description": "Record goods receipts" },
+    { "name": "$XSAPPNAME.FinanceOfficer",     "description": "Verify invoices and process payments" }
+  ],
+  "role-templates": [
+    {
+      "name": "ProcurementOfficer",
+      "description": "Manage the procurement lifecycle up to goods receipt",
+      "scope-references": ["$XSAPPNAME.ProcurementOfficer"]
+    },
+    {
+      "name": "WarehouseManager",
+      "description": "Record and complete goods receipts",
+      "scope-references": ["$XSAPPNAME.WarehouseManager"]
+    },
+    {
+      "name": "FinanceOfficer",
+      "description": "Verify invoices and process payments",
+      "scope-references": ["$XSAPPNAME.FinanceOfficer"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "P2P_Procurement",
+      "description": "Procurement Officer collection",
+      "role-template-references": ["$XSAPPNAME.ProcurementOfficer"]
+    },
+    {
+      "name": "P2P_Warehouse",
+      "description": "Warehouse Manager collection",
+      "role-template-references": ["$XSAPPNAME.WarehouseManager"]
+    },
+    {
+      "name": "P2P_Finance",
+      "description": "Finance Officer collection",
+      "role-template-references": ["$XSAPPNAME.FinanceOfficer"]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+/* -- Page background -- */
+.sapMPage > section {
+    background: #f0f2f5;
+}
+
+/* -- GenericTile base -- */
+.sapMGT {
+    min-width: 10rem;
+}
+
+/* -- Tile hover effects -- */
+.tileHover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.5rem;
+}
+.tileHover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+.tileHover:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* -- Card-like detail pages -- */
+.sapMPage .sapMPageEnableScrolling > .sapMPanelContent,
+.sapMPanel {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    margin: 0.5rem;
+}
+
+/* -- Table styling -- */
+.sapMList {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.sapMListTblHeader {
+    background: #fafbfc;
+}
+
+.sapMListTblRow:hover {
+    background-color: #f5f7fa !important;
+}
+
+/* -- IconTabBar -- */
+.sapMITB {
+    background: transparent;
+}
+
+.sapMITBFilter {
+    transition: border-color 0.2s ease;
+}
+
+/* -- Status color indicators -- */
+.sapMObjStatusSuccess .sapMObjStatusText {
+    font-weight: 600;
+}
+.sapMObjStatusError .sapMObjStatusText {
+    font-weight: 600;
+}
+.sapMObjStatusWarning .sapMObjStatusText {
+    font-weight: 600;
+}
+
+/* -- Search field styling -- */
+.sapMSF {
+    border-radius: 0.375rem;
+}
+
+/* -- Header toolbar subtle bottom border -- */
+.sapMTBStandard {
+    border-bottom: 1px solid #e8eaed;
+}
+
+/* -- Smooth transitions for ObjectStatus -- */
+.sapMObjStatus {
+    transition: color 0.15s ease;
+}
+
+/* -- NumericContent icon styling -- */
+.sapMNCIconImage {
+    opacity: 0.8;
+}
+
+/* -- Better form dialog spacing -- */
+.sapMDialogSection .sapMVBox > .sapMLabel {
+    margin-top: 0.5rem;
+}
+
+/* -- KPI section title styling -- */
+.sapMTitle.sapMTitleStyleH3 {
+    color: #354a5f;
+    letter-spacing: 0.02em;
+}

@@ -1,0 +1,58 @@
+<mvc:View
+    controllerName="p2p.app.controller.ProcessFlow"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{i18n>processFlowTitle}" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <MessageStrip type="Information" showIcon="true"
+                              text="{i18n>processFlowInfo}"/>
+            </VBox>
+            <IconTabBar id="flowTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>filterAll}" key="All" icon="sap-icon://list"/>
+                    <IconTabFilter text="{i18n>filterPR}" key="PR" icon="sap-icon://request"/>
+                    <IconTabFilter text="{i18n>filterPO}" key="PO" icon="sap-icon://shipping-status"/>
+                    <IconTabFilter text="{i18n>filterGR}" key="GR" icon="sap-icon://inventory"/>
+                    <IconTabFilter text="{i18n>filterInvoice}" key="Invoice" icon="sap-icon://receipt"/>
+                    <IconTabFilter text="{i18n>filterPayment}" key="Payment" icon="sap-icon://money-bills"/>
+                </items>
+                <content>
+                    <Table id="tbl"
+                           items="{path: '/ProcessFlow', parameters: {$count: true}}"
+                           growing="true" growingThreshold="50">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="{= 'Events: ' + (${/ProcessFlow/$count} || 0)}"/>
+                                <ToolbarSpacer/>
+                                <SearchField width="20rem" liveChange=".onSearch" placeholder="{i18n>searchFlowPlaceholder}"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="{i18n>colTimestamp}"/></Column>
+                            <Column><Text text="{i18n>colType}"/></Column>
+                            <Column><Text text="{i18n>colDocument}"/></Column>
+                            <Column><Text text="{i18n>colFrom}"/></Column>
+                            <Column><Text text="{i18n>colTo}"/></Column>
+                            <Column><Text text="{i18n>colActor}"/></Column>
+                            <Column><Text text="{i18n>colRemarks}"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{timestamp}"/>
+                                    <ObjectStatus text="{entityType}" state="Information"/>
+                                    <Text text="{entityNumber}"/>
+                                    <Text text="{fromStatus}"/>
+                                    <ObjectStatus text="{toStatus}" state="Success"/>
+                                    <Text text="{actor}"/>
+                                    <Text text="{remarks}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </content>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

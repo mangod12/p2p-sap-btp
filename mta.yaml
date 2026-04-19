@@ -1,0 +1,82 @@
+_schema-version: "3.2"
+ID: p2p-sap-btp
+version: 1.0.0
+description: "Procure-to-Pay Application on SAP BTP"
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+  # CAP service module (deployed to Cloud Foundry)
+  - name: p2p-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 512M
+      disk-quota: 1024M
+    requires:
+      - name: p2p-db
+      - name: p2p-auth
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+
+  # HANA HDI container deployer
+  - name: p2p-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: p2p-db
+
+  # Static UI content (launchpad + UI5 app) served via approuter
+  - name: p2p-app
+    type: html5
+    path: app
+    parameters:
+      build-result: dist
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install --prefix .
+        - mkdir -p dist && cp -r launchpad p2p dist/
+
+  # Approuter — entry point, handles auth and static routes
+  - name: p2p-approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: p2p-auth
+
+resources:
+  - name: p2p-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: p2p-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json

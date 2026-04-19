@@ -1,0 +1,2 @@
+ID;paymentNumber;invoice_ID;invoiceNumber;amount;paymentDate;method;reference;processedBy;status
+77777777-7777-7777-7777-777777777001;PAY-1001;66666666-6666-6666-6666-666666666001;INV-1001;1875.00;2026-04-18;BankTransfer;TXN-1001;fin.officer;Completed

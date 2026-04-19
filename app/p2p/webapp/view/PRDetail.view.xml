@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="p2p.app.controller.PRDetail"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="Purchase Requisition" showNavButton="true" navButtonPress=".onNavBack">
+        <headerContent>
+            <Button text="Submit"    type="Emphasized" press=".onSubmit"   visible="{= ${status} === 'Draft'}"/>
+            <Button text="Approve"   type="Accept"     press=".onApprove"  visible="{= ${status} === 'Submitted' || ${status} === 'Draft'}"/>
+            <Button text="Reject"    type="Reject"     press=".onReject"   visible="{= ${status} !== 'Rejected' &amp;&amp; ${status} !== 'Converted'}"/>
+            <Button text="Convert to PO" type="Emphasized" press=".onConvert" visible="{= ${status} === 'Approved'}"/>
+        </headerContent>
+        <content>
+            <ObjectHeader title="{prNumber}" number="{quantity}" numberUnit="EA">
+                <statuses>
+                    <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+                </statuses>
+                <attributes>
+                    <ObjectAttribute title="Material" text="{materialName}"/>
+                    <ObjectAttribute title="Vendor"   text="{vendorName}"/>
+                    <ObjectAttribute title="Requested By" text="{requestedBy}"/>
+                    <ObjectAttribute title="Needed By" text="{neededBy}"/>
+                </attributes>
+            </ObjectHeader>
+
+            <Panel headerText="Details" class="sapUiSmallMargin">
+                <form:SimpleForm editable="false" layout="ResponsiveGridLayout">
+                    <Label text="PR Number"/>     <Text text="{prNumber}"/>
+                    <Label text="Status"/>        <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+                    <Label text="Material"/>      <Text text="{materialName}"/>
+                    <Label text="Quantity"/>      <Text text="{quantity}"/>
+                    <Label text="Vendor"/>        <Text text="{vendorName}"/>
+                    <Label text="Requested By"/>  <Text text="{requestedBy}"/>
+                    <Label text="Request Date"/>  <Text text="{requestDate}"/>
+                    <Label text="Needed By"/>     <Text text="{neededBy}"/>
+                    <Label text="Remarks"/>       <Text text="{remarks}"/>
+                </form:SimpleForm>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

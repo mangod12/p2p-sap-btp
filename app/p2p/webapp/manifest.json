@@ -1,0 +1,97 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "p2p.app",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": { "version": "1.0.0" },
+    "dataSources": {
+      "mainService": {
+        "uri": "/p2p/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {},
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "p2p.app.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": { "compact": true, "cozy": true },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": { "bundleName": "p2p.app.i18n.i18n" }
+      },
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [{ "uri": "css/style.css" }]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "p2p.app.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        { "pattern": "",                        "name": "home",          "target": "home" },
+        { "pattern": "PurchaseRequisitions",    "name": "prList",        "target": "prList" },
+        { "pattern": "PurchaseRequisitions/{id}","name": "prDetail",     "target": "prDetail" },
+        { "pattern": "PurchaseOrders",          "name": "poList",        "target": "poList" },
+        { "pattern": "PurchaseOrders/{id}",     "name": "poDetail",      "target": "poDetail" },
+        { "pattern": "GoodsReceipts",           "name": "grList",        "target": "grList" },
+        { "pattern": "Invoices",                "name": "invList",       "target": "invList" },
+        { "pattern": "Payments",                "name": "payList",       "target": "payList" },
+        { "pattern": "ProcessFlow",             "name": "flow",          "target": "flow" },
+        { "pattern": "Vendors",                 "name": "vendors",       "target": "vendors" },
+        { "pattern": "Materials",               "name": "materials",     "target": "materials" }
+      ],
+      "targets": {
+        "home":      { "viewName": "Home",      "viewId": "home" },
+        "prList":    { "viewName": "PRList",    "viewId": "prList" },
+        "prDetail":  { "viewName": "PRDetail",  "viewId": "prDetail" },
+        "poList":    { "viewName": "POList",    "viewId": "poList" },
+        "poDetail":  { "viewName": "PODetail",  "viewId": "poDetail" },
+        "grList":    { "viewName": "GRList",    "viewId": "grList" },
+        "invList":   { "viewName": "InvoiceList","viewId": "invList" },
+        "payList":   { "viewName": "PaymentList","viewId": "payList" },
+        "flow":      { "viewName": "ProcessFlow","viewId": "flow" },
+        "vendors":   { "viewName": "Vendors",   "viewId": "vendors" },
+        "materials": { "viewName": "Materials", "viewId": "materials" }
+      }
+    }
+  }
+}

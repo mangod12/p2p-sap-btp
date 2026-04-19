@@ -1,0 +1,2 @@
+ID;invoiceNumber;po_ID;poNumber;vendorName;invoiceDate;dueDate;amount;verifiedBy;status
+66666666-6666-6666-6666-666666666001;INV-1001;44444444-4444-4444-4444-444444444001;PO-1001;Acme Supplies Ltd.;2026-04-16;2026-04-30;1875.00;fin.officer;Verified

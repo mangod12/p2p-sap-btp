@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>P2P SAP BTP — Launchpad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <style>
+      :root {
+        --sap-primary: #0a6ed1;
+        --sap-primary-dark: #085caf;
+        --sap-bg: #edf1f5;
+        --sap-surface: #ffffff;
+        --sap-text: #32363a;
+        --sap-muted: #6a6d70;
+        --sap-border: #d9d9d9;
+        --sap-success: #2b7c2b;
+        --sap-warn: #c35500;
+        --sap-error: #bb0000;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; font-family: "72", "Segoe UI", Arial, sans-serif; color: var(--sap-text); background: var(--sap-bg); }
+      header { background: #354a5f; color: #fff; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+      header .brand { font-size: 18px; font-weight: 600; letter-spacing: 0.3px; }
+      header .user { font-size: 13px; opacity: 0.85; }
+      main { padding: 28px; max-width: 1200px; margin: 0 auto; }
+      h1 { font-size: 22px; font-weight: 400; margin: 0 0 4px; }
+      .subtitle { color: var(--sap-muted); margin-bottom: 24px; font-size: 13px; }
+      .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+      .kpi { background: var(--sap-surface); border: 1px solid var(--sap-border); border-radius: 6px; padding: 14px 16px; }
+      .kpi .label { font-size: 12px; color: var(--sap-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+      .kpi .value { font-size: 26px; font-weight: 300; color: var(--sap-primary); margin-top: 6px; }
+      .section-title { font-size: 14px; font-weight: 600; color: var(--sap-muted); text-transform: uppercase; letter-spacing: 0.6px; margin: 8px 0 12px; }
+      .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+      .tile {
+        background: var(--sap-surface); border: 1px solid var(--sap-border); border-radius: 6px; padding: 20px;
+        cursor: pointer; transition: all 0.15s ease; text-decoration: none; color: inherit;
+        display: flex; flex-direction: column; min-height: 140px;
+      }
+      .tile:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); border-color: var(--sap-primary); }
+      .tile .icon { font-size: 28px; margin-bottom: 10px; }
+      .tile .title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+      .tile .desc { font-size: 12px; color: var(--sap-muted); flex: 1; }
+      .tile .count { font-size: 22px; font-weight: 300; color: var(--sap-primary); margin-top: 8px; }
+      footer { text-align: center; padding: 20px; color: var(--sap-muted); font-size: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+      <div class="brand">SAP Business Technology Platform — Procure-to-Pay</div>
+      <div class="user" id="user">Loading…</div>
+    </header>
+    <main>
+      <h1>My Home</h1>
+      <div class="subtitle">End-to-end procurement lifecycle: Requisition → Order → Receipt → Invoice → Payment</div>
+
+      <div class="kpi-strip" id="kpis">
+        <div class="kpi"><div class="label">Open PRs</div><div class="value" id="kpi-pr">–</div></div>
+        <div class="kpi"><div class="label">Open POs</div><div class="value" id="kpi-po">–</div></div>
+        <div class="kpi"><div class="label">Pending GRs</div><div class="value" id="kpi-gr">–</div></div>
+        <div class="kpi"><div class="label">Pending Invoices</div><div class="value" id="kpi-inv">–</div></div>
+        <div class="kpi"><div class="label">Scheduled Payments</div><div class="value" id="kpi-pay">–</div></div>
+        <div class="kpi"><div class="label">Total Spend</div><div class="value" id="kpi-spend">–</div></div>
+      </div>
+
+      <div class="section-title">Procurement Applications</div>
+      <div class="tiles">
+        <a class="tile" href="../p2p/webapp/index.html#/PurchaseRequisitions">
+          <div class="icon">&#128221;</div>
+          <div class="title">Purchase Requisitions</div>
+          <div class="desc">Create &amp; manage procurement requests</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/PurchaseOrders">
+          <div class="icon">&#128196;</div>
+          <div class="title">Purchase Orders</div>
+          <div class="desc">Generate and dispatch orders to vendors</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/GoodsReceipts">
+          <div class="icon">&#128230;</div>
+          <div class="title">Goods Receipts</div>
+          <div class="desc">Record delivered goods in the warehouse</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/Invoices">
+          <div class="icon">&#129534;</div>
+          <div class="title">Invoice Verification</div>
+          <div class="desc">Verify vendor invoices against POs</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/Payments">
+          <div class="icon">&#128179;</div>
+          <div class="title">Payments</div>
+          <div class="desc">Schedule and process vendor payments</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/ProcessFlow">
+          <div class="icon">&#128202;</div>
+          <div class="title">Process Flow</div>
+          <div class="desc">Track the end-to-end procurement journey</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/Vendors">
+          <div class="icon">&#127970;</div>
+          <div class="title">Vendors</div>
+          <div class="desc">Master data for suppliers</div>
+        </a>
+        <a class="tile" href="../p2p/webapp/index.html#/Materials">
+          <div class="icon">&#128230;</div>
+          <div class="title">Materials</div>
+          <div class="desc">Master data for materials</div>
+        </a>
+      </div>
+    </main>
+    <footer>P2P Application &middot; Built on SAP BTP with CAP (Node.js) &middot; SAP Fiori / UI5</footer>
+
+    <script>
+      (async () => {
+        try {
+          const res = await fetch('/p2p/getKPIs()');
+          if (res.ok) {
+            const k = await res.json();
+            document.getElementById('kpi-pr').textContent    = k.openPRs ?? 0;
+            document.getElementById('kpi-po').textContent    = k.openPOs ?? 0;
+            document.getElementById('kpi-gr').textContent    = k.pendingGRs ?? 0;
+            document.getElementById('kpi-inv').textContent   = k.pendingInvoices ?? 0;
+            document.getElementById('kpi-pay').textContent   = k.scheduledPayments ?? 0;
+            document.getElementById('kpi-spend').textContent =
+              (k.totalSpend != null) ? Number(k.totalSpend).toLocaleString(undefined, { style:'currency', currency:'USD' }) : '$0';
+          }
+        } catch (e) { console.warn('KPI fetch failed', e); }
+        try {
+          const who = await fetch('/p2p/$metadata', { method: 'HEAD' });
+          document.getElementById('user').textContent = who.ok ? 'Signed in' : 'Offline';
+        } catch (_) { document.getElementById('user').textContent = 'Offline'; }
+      })();
+    </script>
+</body>
+</html>

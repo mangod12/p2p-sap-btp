@@ -1,0 +1,65 @@
+{
+  "name": "p2p-sap-btp",
+  "version": "1.0.0",
+  "description": "Procure-to-Pay (P2P) Application on SAP Business Technology Platform",
+  "repository": "https://github.com/your-org/p2p-sap-btp",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7.9.10",
+    "@sap/ux-specification": "^1.120.0"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch": "cds watch",
+    "build": "cds build --production",
+    "deploy": "cds deploy --to sqlite:db/p2p.db"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "db/p2p.db"
+        }
+      },
+      "auth": {
+        "kind": "mocked-auth",
+        "users": {
+          "proc.officer": {
+            "password": "initial",
+            "roles": [
+              "ProcurementOfficer"
+            ]
+          },
+          "wh.manager": {
+            "password": "initial",
+            "roles": [
+              "WarehouseManager"
+            ]
+          },
+          "fin.officer": {
+            "password": "initial",
+            "roles": [
+              "FinanceOfficer"
+            ]
+          },
+          "admin": {
+            "password": "initial",
+            "roles": [
+              "ProcurementOfficer",
+              "WarehouseManager",
+              "FinanceOfficer"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

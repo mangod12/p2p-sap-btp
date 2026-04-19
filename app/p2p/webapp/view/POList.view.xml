@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="p2p.app.controller.POList"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{i18n>poListTitle}" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <Table id="tbl"
+                   items="{path: '/PurchaseOrders', parameters: {$count: true}}"
+                   growing="true" growingThreshold="25" mode="SingleSelectMaster">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{= 'Total: ' + (${/PurchaseOrders/$count} || 0)}"/>
+                        <ToolbarSpacer/>
+                        <SearchField width="20rem" liveChange=".onSearch" placeholder="{i18n>searchPOPlaceholder}"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="{i18n>colPONumber}"/></Column>
+                    <Column><Text text="{i18n>colVendor}"/></Column>
+                    <Column><Text text="{i18n>colMaterial}"/></Column>
+                    <Column hAlign="End"><Text text="{i18n>colQty}"/></Column>
+                    <Column hAlign="End"><Text text="{i18n>colUnitPrice}"/></Column>
+                    <Column hAlign="End"><Text text="{i18n>colTotal}"/></Column>
+                    <Column><Text text="{i18n>colStatus}"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onOpen">
+                        <cells>
+                            <ObjectIdentifier title="{poNumber}"/>
+                            <Text text="{vendorName}"/>
+                            <Text text="{materialName}"/>
+                            <ObjectNumber number="{quantity}"/>
+                            <ObjectNumber number="{unitPrice}" unit="USD"/>
+                            <ObjectNumber number="{totalAmount}" unit="USD" emphasized="true"/>
+                            <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
